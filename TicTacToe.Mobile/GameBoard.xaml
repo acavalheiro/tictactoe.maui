@@ -5,24 +5,39 @@
              x:Class="TicTacToe.Mobile.GameBoard"
              xmlns:viewModels="clr-namespace:TicTacToe.Mobile.ViewModels"
              x:DataType="viewModels:GameBoardViewModel"
+             xmlns:models="clr-namespace:TicTacToe.Mobile.Models"
              xmlns:System="clr-namespace:System;assembly=mscorlib"
-             BackgroundColor="White"
-            >
+>
 
 
     <Grid VerticalOptions="Center" HorizontalOptions="Center">
-        <CollectionView ItemsSource="{Binding Board}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="400" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{Binding Board}" Grid.Row="0">
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Span="3" VerticalItemSpacing="0" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="{x:Type System:String}">
+                <DataTemplate x:DataType="models:TicTacToeModel">
                     <Frame BackgroundColor="White" CornerRadius="0" >
-                        <Label Text="{Binding}" TextColor="Black" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding SelectedText}" TextColor="Black" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:GameBoardViewModel}}, Path=SelectedItemCommand}"
+                                CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <Label Text="{Binding GameStatus}" Grid.Row="1" FontSize="20"></Label>
+
+        <Button Text="Restart Game" HeightRequest="50" Command="{Binding RestartGameCommand}" Grid.Row="2"/>
     </Grid>
+    
+
 
 </ContentPage>
