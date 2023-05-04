@@ -18,4 +18,9 @@ public partial class GameBoard : ContentPage
         this.InitializeComponent();
         this.BindingContext = new GameBoardViewModel();
     }
+
+    private void TapGestureRecognizer_OnTapped(object sender, TappedEventArgs e)
+    {
+        Console.WriteLine("bla");
+    }
 }
