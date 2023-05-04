@@ -22,8 +22,12 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:TicTacToeModel">
-                    <Border BackgroundColor="White"  >
-                        <Label Text="{Binding SelectedText}" TextColor="Black" FontSize="28" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                    <Border>
+                        <Frame BackgroundColor="White">
+                        <Label Text="{Binding SelectedText}" TextColor="Black" FontSize="20" HeightRequest="20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                        
+                            </Frame>
+
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer 
                                 Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:GameBoardViewModel}}, Path=SelectedItemCommand}"
