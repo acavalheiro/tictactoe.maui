@@ -25,8 +25,13 @@
                     <Border>
                         <Frame BackgroundColor="White">
                         <Label Text="{Binding SelectedText}" TextColor="Black" FontSize="20" HeightRequest="20" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
-                        
-                            </Frame>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={x:RelativeSource AncestorType={x:Type viewModels:GameBoardViewModel}}, Path=SelectedItemCommand}"
+                                CommandParameter="{Binding .}"
+                            />
+                        </Frame.GestureRecognizers>
+                        </Frame>
 
                         <Border.GestureRecognizers>
                             <TapGestureRecognizer 
@@ -34,6 +39,7 @@
                                 CommandParameter="{Binding .}"
                                 />
                         </Border.GestureRecognizers>
+                        
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
